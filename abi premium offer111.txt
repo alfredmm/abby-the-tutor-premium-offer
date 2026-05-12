@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformational Wellness With Abi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Brand Colors */
+    --pink: #F472B6;
+    --pink-light: #FBCFE8;
+    --pink-deep: #EC4899;
+    --green: #34D399;
+    --green-light: #A7F3D0;
+    --blue: #38BDF8;
+    --blue-light: #BAE6FD;
+    
+    /* New Bright Theme Colors */
+    --bg-base: #fffbfd; /* Bright Soft White/Pink */
+    --bg-card: #ffffff;
+    --text-main: #1f2937; /* Dark Grey for text */
+    --text-muted: #4b5563; /* Medium Grey */
+    --border-light: rgba(0,0,0,0.06);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-base);
+    color: var(--text-main);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── GRADIENT MESH BG (Brighter Version) ── */
+  .mesh-bg {
+    position: fixed; inset: 0; z-index: 0;
+    background:
+      radial-gradient(circle at 15% 15%, rgba(244,114,182,0.15) 0%, transparent 40%),
+      radial-gradient(circle at 85% 25%, rgba(56,189,248,0.12) 0%, transparent 40%),
+      radial-gradient(circle at 50% 85%, rgba(52,211,153,0.12) 0%, transparent 40%),
+      var(--bg-base);
+    pointer-events: none;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 5%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border-light);
+    animation: fadeDown .8s ease both;
+  }
+  @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: .7rem;
+    text-decoration: none;
+  }
+  .nav-logo img {
+    width: 52px; height: 52px; border-radius: 50%;
+    object-fit: cover;
+  }
+  .nav-logo span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600; letter-spacing: .02em;
+    background: linear-gradient(90deg, var(--pink-deep), var(--blue));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  .nav-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .nav-links a {
+    font-size: .9rem; font-weight: 500; 
+    color: var(--text-muted); text-decoration: none;
+    transition: color .25s;
+  }
+  .nav-links a:hover { color: var(--pink-deep); }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--pink-deep), var(--blue));
+    color: white; font-size: .85rem; font-weight: 600;
+    padding: .6rem 1.4rem; border-radius: 50px; text-decoration: none;
+    border: none; cursor: pointer; letter-spacing: .04em;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 4px 15px rgba(236,72,153,0.25);
+  }
+  .nav-cta:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(236,72,153,0.4); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 8rem 5% 5rem;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(244,114,182,0.1);
+    border: 1px solid rgba(244,114,182,0.3);
+    color: var(--pink-deep);
+    font-size: .75rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .5rem 1.2rem; border-radius: 50px;
+    margin-bottom: 2rem;
+    animation: fadeUp .9s .3s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 400; line-height: 1.1;
+    max-width: 950px;
+    color: var(--text-main);
+    animation: fadeUp .9s .5s ease both;
+  }
+
+  .hero h1 .grad {
+    background: linear-gradient(100deg, var(--pink-deep), var(--blue), var(--green));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradShift 5s ease infinite;
+  }
+
+  @keyframes gradShift {
+    0%,100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+  }
+
+  .hero-sub {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    color: var(--text-muted);
+    font-weight: 400; line-height: 1.7;
+    max-width: 700px; margin: 2rem auto 0;
+    animation: fadeUp .9s .7s ease both;
+  }
+
+  .hero-ctas {
+    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
+    margin-top: 3rem;
+    animation: fadeUp .9s .9s ease both;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--pink-deep), #d946ef);
+    color: white; font-weight: 600; font-size: 1rem;
+    padding: 1rem 2.4rem; border-radius: 50px; text-decoration: none;
+    box-shadow: 0 4px 20px rgba(236,72,153,0.3);
+    transition: transform .2s, box-shadow .2s;
+    letter-spacing: .03em;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(236,72,153,0.5); }
+
+  .btn-secondary {
+    background: white;
+    border: 1px solid var(--blue);
+    color: var(--blue); font-weight: 600; font-size: 1rem;
+    padding: 1rem 2.4rem; border-radius: 50px; text-decoration: none;
+    transition: all .25s;
+    letter-spacing: .03em;
+  }
+  .btn-secondary:hover { background: var(--blue-light); color: var(--text-main); transform: translateY(-3px); }
+
+  /* floating orbs - brighter */
+  .orb {
+    position: absolute; border-radius: 50%; filter: blur(70px); pointer-events: none;
+    animation: float 8s ease-in-out infinite;
+    opacity: 0.6;
+  }
+  .orb1 { width:400px;height:400px; background:rgba(244,114,182,0.2); top:-100px; left:-100px; animation-delay:0s; }
+  .orb2 { width:350px;height:350px; background:rgba(56,189,248,0.15); top:20%; right:-100px; animation-delay:2s; }
+  .orb3 { width:300px;height:300px; background:rgba(52,211,153,0.15); bottom:10%; left:15%; animation-delay:4s; }
+  @keyframes float {
+    0%,100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-30px) scale(1.05); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(30px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* ── STATS BAR ── */
+  .stats {
+    position: relative; z-index: 1;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 0;
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(10px);
+  }
+  .stat-item {
+    flex: 1; min-width: 160px;
+    padding: 2.5rem 2rem; text-align: center;
+    border-right: 1px solid var(--border-light);
+    transition: background .3s;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: rgba(255,255,255,0.8); }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 600;
+    background: linear-gradient(135deg, var(--pink-deep), var(--blue));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    display: block;
+  }
+  .stat-label { font-size: .8rem; font-weight: 600; color: var(--text-muted); letter-spacing: .08em; text-transform: uppercase; margin-top: .5rem; }
+
+  /* ── SECTION COMMON ── */
+  section { position: relative; z-index: 1; padding: 7rem 5%; }
+  .section-tag {
+    display: inline-block; font-size: .75rem; font-weight: 700;
+    letter-spacing: .15em; text-transform: uppercase;
+    color: var(--pink-deep); margin-bottom: 1rem;
+    background: rgba(244,114,182,0.1); padding: 0.4rem 1rem; border-radius: 20px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 400; line-height: 1.15;
+    max-width: 800px;
+    color: var(--text-main);
+  }
+  
+  /* Gradients for text */
+  .grad-pink  { background: linear-gradient(100deg,var(--pink-deep),var(--pink)); -webkit-background-clip:text;-webkit-text-fill-color:transparent; }
+  .grad-blue  { background: linear-gradient(100deg,var(--blue),var(--green));    -webkit-background-clip:text;-webkit-text-fill-color:transparent; }
+  .grad-green { background: linear-gradient(100deg,var(--green),var(--blue));    -webkit-background-clip:text;-webkit-text-fill-color:transparent; }
+  .grad-tri   { background: linear-gradient(110deg,var(--pink-deep),var(--blue),var(--green)); background-size:200%;animation:gradShift 5s ease infinite;-webkit-background-clip:text;-webkit-text-fill-color:transparent; }
+
+  /* ── WHO IT'S FOR ── */
+  .for-section { background: transparent; }
+  .for-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  
+  /* CARD STYLING WITH GLOW & GRADIENT BORDER */
+  .for-card {
+    background: var(--bg-card);
+    border-radius: 16px; 
+    padding: 2rem;
+    display: flex; align-items: flex-start; gap: 1.2rem;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0; transform: translateY(20px);
+    /* Default border is subtle */
+    border: 1px solid transparent; 
+  }
+
+  /* The Gradient Border Magic */
+  .for-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px; 
+    padding: 1.5px; /* Width of the border */
+    background: linear-gradient(135deg, var(--pink), var(--blue), var(--green)); 
+    -webkit-mask: 
+       linear-gradient(#fff 0 0) content-box, 
+       linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.3; /* Subtle by default */
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .for-card.visible {
+    animation: fadeUp .7s ease forwards;
+  }
+  
+  /* HOVER EFFECTS */
+  .for-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(236, 72, 153, 0.15); /* Pink Glow */
+  }
+  .for-card:hover::before {
+    opacity: 1; /* Full gradient border on hover */
+  }
+
+  .for-icon {
+    width: 50px; height: 50px; flex-shrink: 0;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--pink-light), white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 10px rgba(244,114,182,0.15);
+  }
+  .for-card p { font-size: 1rem; color: var(--text-muted); line-height: 1.6; font-weight: 500;}
+
+  /* ── WHAT'S INCLUDED ── */
+  .included-grid {
+    display: grid; grid-template-columns: repeat(auto-fill,minmax(320px,1fr));
+    gap: 2rem; margin-top: 3rem;
+  }
+  .inc-card {
+    border-radius: 24px; padding: 2.5rem;
+    position: relative; 
+    background: white;
+    transition: transform .3s, box-shadow .3s;
+    opacity: 0;
+    border: 1px solid transparent; /* Placeholder for mask */
+  }
+  
+  /* Gradient Border for Included Cards too */
+  .inc-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px; 
+    padding: 2px; 
+    background: linear-gradient(135deg, var(--pink), var(--blue), var(--green)); 
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.2;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .inc-card.visible { animation: fadeUp .7s ease forwards; }
+  
+  .inc-card:hover { 
+    transform: translateY(-8px); 
+    box-shadow: 0 20px 50px rgba(56, 189, 248, 0.2); /* Blue Glow */
+  }
+  .inc-card:hover::before { opacity: 1; }
+
+  .inc-card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem; font-weight: 300; line-height: 1;
+    background: linear-gradient(135deg,var(--pink-deep),var(--blue));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+  .inc-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 600; margin-bottom: 1rem;
+    color: var(--text-main);
+  }
+  .inc-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+
+  /* ── JOURNEY / TIMELINE ── */
+  .journey-section {  }
+  .phases {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    margin-top: 3rem;
+  }
+  @media(max-width:700px){ .phases { grid-template-columns: 1fr; } }
+  
+  .phase-card {
+    border-radius: 24px; padding: 3rem;
+    position: relative; overflow: hidden;
+    background: white;
+    border: 1px solid transparent;
+    transition: transform .3s, box-shadow .3s;
+  }
+  
+  /* Gradient Border for Phases */
+  .phase-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px; 
+    padding: 2px; 
+    background: linear-gradient(135deg, var(--pink), var(--green)); 
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .phase-card:hover { transform: scale(1.02); box-shadow: 0 15px 40px rgba(52, 211, 153, 0.15); }
+  .phase-card:hover::before { opacity: 1; }
+
+  .phase-label {
+    font-size: .75rem; font-weight: 700; letter-spacing: .15em;
+    text-transform: uppercase; margin-bottom: 1rem;
+  }
+  .phase-1 .phase-label { color: var(--pink-deep); }
+  .phase-2 .phase-label { color: var(--green-deep); }
+  
+  .phase-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 600; margin-bottom: 1.5rem;
+    color: var(--text-main);
+  }
+  .phase-list { list-style: none; }
+  .phase-list li {
+    font-size: 1rem; color: var(--text-muted); line-height: 1.6;
+    padding: .6rem 0; border-bottom: 1px solid var(--border-light);
+    display: flex; align-items: center; gap: .8rem;
+  }
+  .phase-list li:last-child { border-bottom: none; }
+  .phase-list li::before { content:'✦'; font-size: .8rem; flex-shrink:0; }
+  .phase-1 .phase-list li::before { color: var(--pink-deep); }
+  .phase-2 .phase-list li::before { color: var(--green); }
+
+  /* ── TRANSFORMATION PROMISES ── */
+  .transform-section { text-align: center; }
+  .promises {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
+    margin-top: 3rem; max-width: 900px; margin-inline: auto;
+  }
+  .promise-pill {
+    background: white;
+    border: 1px solid var(--border-light);
+    border-radius: 50px; padding: .8rem 1.8rem;
+    font-size: 1rem; color: var(--text-main); font-weight: 500;
+    transition: all .3s; cursor: default;
+    display: flex; align-items: center; gap: .6rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+  }
+  .promise-pill:hover {
+    border-color: var(--green);
+    color: var(--text-main);
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(52, 231, 153, 0.2);
+  }
+  .promise-pill span { font-size: 1.2rem; }
+
+  /* ── PRICING ── */
+  .pricing-section { text-align: center; }
+  .price-card {
+    display: inline-block; max-width: 600px; width: 100%;
+    border-radius: 32px; padding: 4rem 3rem;
+    background: white;
+    border: 1px solid transparent; /* For gradient mask */
+    box-shadow: 0 20px 60px rgba(236,72,153,0.1);
+    margin-top: 3rem;
+    position: relative; overflow: hidden;
+  }
+  
+  /* Pricing Gradient Border */
+  .price-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 32px; 
+    padding: 3px; 
+    background: linear-gradient(135deg, var(--pink-deep), var(--blue), var(--green)); 
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .price-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5.5rem; font-weight: 400;
+    background: linear-gradient(135deg,var(--pink-deep),var(--blue),var(--green));
+    background-size: 200%;
+    animation: gradShift 4s ease infinite;
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+  .price-period { font-size:.9rem; color:var(--text-muted); letter-spacing:.08em; margin-bottom:2.5rem; font-weight: 500; }
+  
+  .price-includes {
+    list-style: none; text-align: left; margin: 2rem 0;
+  }
+  .price-includes li {
+    display: flex; align-items: center; gap: 1rem;
+    padding: .8rem 0; border-bottom: 1px solid var(--border-light);
+    font-size: 1rem; color: var(--text-main); font-weight: 500;
+  }
+  .price-includes li:last-child { border-bottom: none; }
+  .check {
+    width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg,var(--green),var(--blue));
+    display: flex; align-items: center; justify-content: center;
+    font-size: .8rem; color: white; font-weight: 700;
+    box-shadow: 0 2px 8px rgba(52, 211, 153, 0.4);
+  }
+  .price-cta {
+    display: block; margin-top: 2.5rem;
+    background: linear-gradient(135deg,var(--pink-deep), #d946ef, var(--blue));
+    background-size: 200%;
+    animation: gradShift 4s ease infinite;
+    color: white; font-size: 1.1rem; font-weight: 700;
+    padding: 1.2rem 2.5rem; border-radius: 50px; text-decoration: none;
+    box-shadow: 0 10px 30px rgba(236,72,153,0.3);
+    transition: transform .2s, box-shadow .2s;
+    letter-spacing: .03em;
+  }
+  .price-cta:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(236,72,153,0.5); }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: rgba(255,255,255,0.5);
+    border-top: 1px solid var(--border-light);
+  }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  @media(max-width:768px){ .contact-grid { grid-template-columns: 1fr; gap: 2rem; } }
+  .contact-info h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem,3.5vw,3rem); font-weight: 400; margin-bottom: 1.5rem;
+    color: var(--text-main);
+  }
+  .contact-info p { font-size:1.05rem;color:var(--text-muted);line-height:1.8;margin-bottom:2.5rem; }
+  
+  .contact-links { display:flex;flex-direction:column;gap:1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    text-decoration: none; color: var(--text-main);
+    font-size: 1rem; font-weight: 500;
+    padding: 1rem 1.5rem;
+    border-radius: 16px;
+    background: white;
+    border: 1px solid var(--border-light);
+    transition: all .25s;
+  }
+  .contact-link:hover { 
+    border-color: var(--pink); 
+    box-shadow: 0 5px 20px rgba(244,114,182,0.15);
+    transform: translateX(5px);
+  }
+  .contact-icon {
+    width: 40px; height: 40px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+    background: var(--bg-base);
+  }
+  .ci-pink  { color: var(--pink-deep); }
+  .ci-blue  { color: var(--blue); }
+  .ci-green { color: var(--green); }
+
+  .contact-form-wrap {
+    background: white;
+    border-radius: 24px; padding: 3rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+    border: 1px solid var(--border-light);
+  }
+  .contact-form-wrap h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 600; margin-bottom: 2rem;
+    color: var(--text-main);
+  }
+  .form-group { margin-bottom: 1.5rem; }
+  .form-group label { display:block;font-size:.8rem;font-weight:700;letter-spacing:.05em;color:var(--text-muted);text-transform:uppercase;margin-bottom:.6rem; }
+  .form-group input,
+  .form-group textarea {
+    width: 100%; background: var(--bg-base);
+    border: 1px solid var(--border-light);
+    border-radius: 12px; padding: 1rem 1.2rem;
+    color: var(--text-main); font-family: 'DM Sans',sans-serif; font-size: 1rem;
+    outline: none; transition: border-color .25s, box-shadow .25s;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--pink);
+    box-shadow: 0 0 0 4px rgba(244,114,182,0.1);
+    background: white;
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-submit {
+    width: 100%; background: linear-gradient(135deg,var(--pink-deep),var(--blue));
+    color: white; font-weight: 700; font-size: 1rem;
+    padding: 1.1rem; border-radius: 12px; border: none; cursor: pointer;
+    letter-spacing: .04em; transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 5px 20px rgba(236,72,153,0.3);
+  }
+  .form-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(236,72,153,0.4); }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative; z-index: 1;
+    text-align: center; padding: 3rem 5%;
+    border-top: 1px solid var(--border-light);
+    font-size: .9rem; color: var(--text-muted);
+    background: white;
+  }
+  footer a { color: var(--pink-deep); font-weight: 600; text-decoration:none; }
+  footer a:hover { color: var(--blue); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity:0; transform:translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* ── RESPONSIVE NAV ── */
+  @media(max-width:900px){ .nav-links { display:none; } }
+</style>
+</head>
+<body>
+
+<div class="mesh-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="https://transformwithabi.com">
+    <img src="https://transformwithabi.com/assets/images/logo.png" alt="Transformational Wellness With Abi logo" onerror="this.style.display='none'">
+    <span>Transformational Wellness With Abi</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Who It's For</a></li>
+    <li><a href="#included">What's Included</a></li>
+    <li><a href="#journey">The Journey</a></li>
+    <li><a href="#pricing">Investment</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="#pricing">Start Your Journey</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <div class="hero-badge">12-Week Private Coaching Experience</div>
+
+  <h1>
+    The <span class="grad">SIMPLE</span> Fat Loss Method<br>
+    for <em>Busy Moms</em>
+  </h1>
+
+  <p class="hero-sub">
+    A realistic approach to losing weight, reducing belly fat, and staying consistent without restrictive dieting. A high-touch private coaching experience for busy mums who want to lose weight, reduce belly fat, feel confident in their body again, and finally stop starting over every Monday.
+  </p>
+
+  <div class="hero-ctas">
+    <a class="btn-primary" href="#pricing">Reply RESET — I'm Ready</a>
+    <a class="btn-secondary" href="#included">See What's Included</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats reveal">
+  <div class="stat-item">
+    <span class="stat-num">12</span>
+    <span class="stat-label">Weeks of Coaching</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">1:1</span>
+    <span class="stat-label">Private Sessions</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">Daily</span>
+    <span class="stat-label">Support & Accountability</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">100%</span>
+    <span class="stat-label">Personalized Plan</span>
+  </div>
+</div>
+
+<!-- WHO IT'S FOR -->
+<section class="for-section" id="about">
+  <div class="reveal">
+    <div class="section-tag">Who This Is For</div>
+    <h2 class="section-title">This program is for busy mums who...</h2>
+  </div>
+  <div class="for-grid">
+    <div class="for-card reveal">
+      <div class="for-icon">😔</div>
+      <p>Feel uncomfortable in their body and are tired of hiding in oversized clothes</p>
+    </div>
+    <div class="for-card reveal">
+      <div class="for-icon">🥗</div>
+      <p>Feel like they are “eating healthy” but still not losing weight</p>
+    </div>
+    <div class="for-card reveal">
+      <div class="for-icon">🔄</div>
+      <p>Keep restarting every week and want a plan that actually fits their lifestyle</p>
+    </div>
+    <div class="for-card reveal">
+      <div class="for-icon">💪</div>
+      <p>Want expert support, accountability, and a proven structure instead of guessing on their own</p>
+    </div>
+    <div class="for-card reveal">
+      <div class="for-icon">⚡</div>
+      <p>Want to lose weight, reduce belly fat, feel more energized, and become the healthiest version of themselves</p>
+    </div>
+    <div class="for-card reveal">
+      <div class="for-icon">🌟</div>
+      <p>Are ready to become the woman who knows exactly how to care for her body and trust herself around food</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section id="included">
+  <div class="reveal">
+    <div class="section-tag">What's Included</div>
+    <h2 class="section-title">Everything you need to <span class="grad-tri">transform</span></h2>
+  </div>
+  <div class="included-grid">
+    <div class="inc-card reveal">
+      <div class="inc-card-num">01</div>
+      <h3>12 Private 1:1 Coaching Calls</h3>
+      <p>You will receive 12 weekly private coaching calls. Each session is designed to help you stay focused, supported, and moving forward with a clear strategy that fits your life—covering progress, nutrition, mindset, and habit change.</p>
+    </div>
+    <div class="inc-card reveal">
+      <div class="inc-card-num">02</div>
+      <h3>Personalized Nutrition Strategy</h3>
+      <p>A custom plan built around your goals, lifestyle, family routine, food preferences, and schedule. Not a copy-and-paste meal plan—a personalized strategy designed to help you get results in a way that feels realistic and flexible.</p>
+    </div>
+    <div class="inc-card reveal">
+      <div class="inc-card-num">03</div>
+      <h3>Metabolism, Hormone & Lifestyle Support</h3>
+      <p>Learn how balanced meals, better meal timing, protein targets, and stress/sleep management work together to support fat loss. Understand why eating less isn't always the answer and how to fuel your body properly.</p>
+    </div>
+    <div class="inc-card reveal">
+      <div class="inc-card-num">04</div>
+      <h3>Daily Accountability & Support</h3>
+      <p>Daily check-ins via chat and email between calls. When real life happens—travel, cravings, off-track weekends—you won't face it alone. You have ongoing adjustments and support built right in.</p>
+    </div>
+    <div class="inc-card reveal">
+      <div class="inc-card-num">05</div>
+      <h3>Food Freedom & Real-Life Flexibility</h3>
+      <p>Navigate weekends, birthdays, holidays, weddings, and restaurants without guilt or spiraling. Learn how to handle treats and indulgent meals without feeling like you have to start over.</p>
+    </div>
+    <div class="inc-card reveal">
+      <div class="inc-card-num">06</div>
+      <h3>The Transformation</h3>
+      <p>This is about more than weight loss. It’s about becoming the woman who stops feeling stuck, creates a sustainable routine, and feels proud of who she is becoming.</p>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="journey-section" id="journey">
+  <div class="reveal">
+    <div class="section-tag">The 12-Week Journey</div>
+    <h2 class="section-title">A clear path to <span class="grad-blue">lasting change</span></h2>
+  </div>
+  <div class="phases reveal">
+    <div class="phase-card phase-1">
+      <div class="phase-label">Phase 1 · Weeks 1–6</div>
+      <h3>Reset &amp; Foundation</h3>
+      <ul class="phase-list">
+        <li>Understand foundations of balanced nutrition</li>
+        <li>Improve your eating structure</li>
+        <li>Support and activate your metabolism</li>
+        <li>Fuel your body properly every day</li>
+        <li>Build simple habits that fit real life</li>
+        <li>Create consistency without needing perfection</li>
+      </ul>
+    </div>
+    <div class="phase-card phase-2">
+      <div class="phase-label">Phase 2 · Weeks 7–12</div>
+      <h3>Sustainable Fat Loss &amp; Integration</h3>
+      <ul class="phase-list">
+        <li>Strengthen eating habits and portion awareness</li>
+        <li>Use flexible meal strategies confidently</li>
+        <li>Navigate social events with confidence</li>
+        <li>Enjoy treats without guilt</li>
+        <li>Understand deeper lifestyle and hormone factors</li>
+        <li>Build the mindset needed for long-term success</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSFORMATION -->
+<section class="transform-section">
+  <div class="reveal">
+    <div class="section-tag">Your Transformation</div>
+    <h2 class="section-title" style="margin:auto;">By week 12 you will feel…</h2>
+  </div>
+  <div class="promises">
+    <div class="promise-pill reveal"><span>✨</span> Lighter in your body</div>
+    <div class="promise-pill reveal"><span>👗</span> Confident in your clothes</div>
+    <div class="promise-pill reveal"><span>🧘</span> In control around food</div>
+    <div class="promise-pill reveal"><span>⚡</span> More energized daily</div>
+    <div class="promise-pill reveal"><span>🔍</span> Clear on what works for you</div>
+    <div class="promise-pill reveal"><span>🆓</span> Free from diet obsession</div>
+    <div class="promise-pill reveal"><span>📅</span> Consistent with your habits</div>
+    <div class="promise-pill reveal"><span>🌸</span> Proud of the woman you're becoming</div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="reveal">
+    <div class="section-tag">Investment</div>
+    <h2 class="section-title" style="margin:auto;">One decision. <span class="grad-pink">12 weeks.</span> A lifetime of results.</h2>
+  </div>
+  <div class="price-card reveal">
+    <div class="price-amount">$2,500</div>
+    <div class="price-period">USD · One-time investment</div>
+    <ul class="price-includes">
+      <li><div class="check">✓</div> 12 weeks of private 1:1 coaching</li>
+      <li><div class="check">✓</div> 12 weekly coaching calls</li>
+      <li><div class="check">✓</div> Personalized nutrition strategy</li>
+      <li><div class="check">✓</div> Daily chat &amp; email support</li>
+      <li><div class="check">✓</div> Weekly accountability &amp; progress tracking</li>
+      <li><div class="check">✓</div> Metabolism &amp; hormone nutrition coaching</li>
+      <li><div class="check">✓</div> Food freedom tools &amp; treat strategies</li>
+      <li><div class="check">✓</div> Supplement guidance</li>
+      <li><div class="check">✓</div> Realistic plan built for busy mum life</li>
+    </ul>
+    <a class="price-cta" href="mailto:hello@transformwithabi.com?subject=RESET - Ready to Start">Reply RESET — I'm Ready to Start ✨</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <div class="section-tag">Get In Touch</div>
+      <h2 class="section-title">Let's talk about <span class="grad-green">your journey</span></h2>
+      <p>If you are a busy mum who is ready to stop guessing, lose weight in a realistic way, and feel confident in your body again, this program is for YOU. Reply RESET and I will show you exactly how this program can support you.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:abigael.ivia.wellness@gmail.com">
+          <div class="contact-icon ci-pink">✉️</div>
+          abigael.ivia.wellness@gmail.com
+        </a>
+        <a class="contact-link" href="tel:+14045630955" target="_blank">
+          <div class="contact-icon ci-blue">📞</div>
+          +1(404)563-0955
+        </a>
+        <a class="contact-link" href="https://transformwithabi.com" target="_blank">
+          <div class="contact-icon ci-blue">🌐</div>
+          www.transformwithabi.com
+        </a>
+      </div>
+    </div>
+    <div class="contact-form-wrap reveal">
+      <h3>Send a Message</h3>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Jane Doe">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="jane@example.com">
+      </div>
+      <div class="form-group">
+        <label>Your Goal</label>
+        <input type="text" placeholder="e.g. Lose 10kg after having my second baby">
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell me a little about yourself and where you're at right now…"></textarea>
+      </div>
+      <button class="form-submit" onclick="alert('Thank you! Abi will be in touch soon 💕')">
+        Send Message ✨
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>With Love and Purpose, Abigael Ivia · Transformational Wellness With Abi · <a href="https://transformwithabi.com">transformwithabi.com</a></p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // stagger children if they are for-cards or inc-cards
+        const cards = e.target.querySelectorAll('.for-card, .inc-card, .promise-pill');
+        cards.forEach((c, i) => {
+          setTimeout(() => c.classList.add('visible'), i * 100);
+        });
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Also observe individual cards
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), 100);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.for-card, .inc-card').forEach(el => cardObserver.observe(el));
+</script>
+</body>
+</html>
